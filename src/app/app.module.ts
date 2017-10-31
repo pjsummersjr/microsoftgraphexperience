@@ -19,11 +19,11 @@ import { GraphService } from './services/graph.service';
 import { GraphComponent } from './graph/graph.component';
 import { SharePointComponent, SiteListComponent } from './graph/sharepoint.component';
 
-import { OAuthCallbackComponent } from './adal/oauthcallback.component';
-import { OAuthCallbackHandler } from './adal/oauthguard.handler';
-import { AuthenticationGuard } from './adal/auth.guard';
-import { AdalService } from './adal/adal.service';
-import { AdalConfigService } from './adal/adal.config.service'; 
+import { OAuthCallbackComponent } from './auth/oauthcallback.component';
+import { OAuthCallbackHandler } from './auth/oauthguard.handler';
+import { AuthenticationGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { AuthConfigService } from './auth/auth.config.service'; 
 
 
 @NgModule({
@@ -50,8 +50,8 @@ import { AdalConfigService } from './adal/adal.config.service';
       {
         path: 'login', component: LoginComponent
       },
-      { path: 'id_token', component: OAuthCallbackComponent, canActivate: [OAuthCallbackHandler] },
-      { path: 'access_token', component: OAuthCallbackComponent, canActivate: [OAuthCallbackHandler] },
+      //{ path: 'id_token', component: OAuthCallbackComponent, canActivate: [OAuthCallbackHandler] },
+      //{ path: 'access_token', component: OAuthCallbackComponent, canActivate: [OAuthCallbackHandler] },
       {
         path: 'azure-search', component: AzureSearchComponent, canActivate: [AuthenticationGuard]
       },
@@ -67,9 +67,9 @@ import { AdalConfigService } from './adal/adal.config.service';
   providers: [SearchService, 
               GraphService,
               OAuthCallbackHandler,
-              AdalService,
+              AuthService,
             AuthenticationGuard,
-          AdalConfigService],
+          AuthConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

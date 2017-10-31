@@ -11,6 +11,7 @@ import { SharePointSite } from '../entities/site';
 export class SharePointComponent implements OnInit {
 
     private sites: Observable<SharePointSite[]>;
+    private rootSite: Observable<SharePointSite>;
 
     constructor(private graphService: GraphService){
     }
@@ -19,17 +20,24 @@ export class SharePointComponent implements OnInit {
         this.sites = this.graphService.getSites();
     }
 
+    getRootSite(): void {
+        this.rootSite = this.graphService.getRootSite();
+        this.rootSite.subscribe((site) => {console.log(site)});
+    }
+
     ngOnInit(): void {
         this.getSites();
+        this.getRootSite();
     }
     
 }
 @Component({
     selector:'site-list',
     template:`
-        <div *ngFor="let site of sites | async">{{site.displayName}}</div>
+        <div>{{rootSite.displayName}}</div>
     `
 })
 export class SiteListComponent {
     @Input()sites: SharePointSite[];
+    @Input()rootSite: SharePointSite;
 }

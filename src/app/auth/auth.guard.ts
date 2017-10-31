@@ -1,11 +1,11 @@
 import { Observable } from 'rxjs/Observable'; 
 import { Injectable } from '@angular/core'; 
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, NavigationExtras } from '@angular/router'; 
-import { AdalService } from './adal.service'; 
+import { AuthService } from './auth.service'; 
 
 @Injectable() 
 export class AuthenticationGuard implements CanActivate { 
-    constructor(private router: Router, private adalService: AdalService) { } 
+    constructor(private router: Router, private adalService: AuthService) { } 
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean { 
         let navigationExtras: NavigationExtras = { 

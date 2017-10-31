@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core'; 
 import { Router } from '@angular/router'; 
-import { AdalService } from './adal.service'; 
+import { AuthService } from './auth.service'; 
 @Component({ 
     template: '<div>Please wait...</div>' 
 }) 
 export class OAuthCallbackComponent implements OnInit { 
-    constructor(private router: Router, private adalService: AdalService) { } 
+    constructor(private router: Router, private adalService: AuthService) { } 
     
     ngOnInit() { 
         if (!this.adalService.userInfo) { 

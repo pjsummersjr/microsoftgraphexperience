@@ -6,18 +6,19 @@ import 'rxjs/add/operator/map';
 import {Document} from '../doclist/document';
 import { SharePointSite } from '../entities/site';
 
-import {AdalService} from '../adal/adal.service';
+import {AuthService} from '../auth/auth.service';
 
 let graphEndPoints = {
     baseEndPoint: "https://graph.microsoft.com/",
     beta: this.baseEndPoint + "/beta",
-    myTrending: "https://graph.microsoft.com/beta/me/insights/trending",
-    sites: "https://graph.microsoft.com/v1.0/sites/root"
+    myTrending: "https://graph.microsoft.com/beta/me/insights/trending?$select=",
+    sites: "https://graph.microsoft.com/v1.0/sites/root?$select=description,id,lastModifiedDateTime,name,webUrl,displayName",
+    spRootSite: "https://graph.microsoft.com/v1.0/sites/root?$select=description,id,lastModifiedDateTime,name,webUrl,displayName"
 }
 
 @Injectable()
 export class GraphService {
-    constructor(private adalService: AdalService, private http: Http){}
+    constructor(private authService: AuthService, private http: Http){}
 
    
     getMyTrending(): Observable<Document[]>{
@@ -29,7 +30,13 @@ export class GraphService {
     getSites(): Observable<SharePointSite[]> {
         let url = graphEndPoints.sites;
         let headers: Headers = this.getHeaders(url);
-        return this.http.get(url, {headers: headers}).map(response => response.json().value as SharePointSite[]);
+        return this.http.get(url, {headers: headers}).map(response => response.json() as SharePointSite[]);
+    }
+
+    getRootSite(): Observable<SharePointSite> {
+        let url = graphEndPoints.spRootSite;
+        let headers: Headers = this.getHeaders(url);
+        return this.http.get(url, {headers: headers}).map(response => response.json() as SharePointSite);
     }
 
     private getHeaders(resource: string): Headers {
@@ -45,11 +52,6 @@ export class GraphService {
     }
 
     private getToken(resource: string): string {
-        let _this = this;
-        let token: string;
-        this.adalService.getResourceToken(resource).subscribe({ 
-            next: (value) => token = value 
-        });
-        return token;
+        return this.authService.accessToken
     }
 }

@@ -3,18 +3,24 @@ import { MatTabsModule,
             MatToolbarModule,
             MatButtonModule,
             MatInputModule,
-            MatCardModule } from '@angular/material';
+            MatCardModule,
+            MatGridListModule,
+        MatProgressBarModule } from '@angular/material';
 
 @NgModule({
     imports:[MatTabsModule, 
                 MatToolbarModule, 
                 MatButtonModule, 
                 MatInputModule,
-                MatCardModule],
+                MatCardModule,
+                MatProgressBarModule,
+            MatGridListModule],
     exports:[MatTabsModule, 
                 MatToolbarModule, 
                 MatButtonModule, 
                 MatInputModule,
-                MatCardModule]
+                MatCardModule,
+                MatProgressBarModule,
+            MatGridListModule]
 })
 export class MaterialModule {} 

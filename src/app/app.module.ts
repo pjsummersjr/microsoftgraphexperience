@@ -17,7 +17,7 @@ import { HomeComponent} from './home/home.component';
 import { LoginComponent } from './home/login.component';
 import { GraphService } from './services/graph.service';
 import { GraphComponent } from './graph/graph.component';
-import { SharePointComponent, SiteListComponent } from './graph/sharepoint.component';
+import { SharePointComponent, SiteListComponent, SPSiteComponent } from './graph/sharepoint.component';
 
 import { OAuthCallbackComponent } from './auth/oauthcallback.component';
 import { OAuthCallbackHandler } from './auth/oauthguard.handler';
@@ -36,6 +36,7 @@ import { AuthConfigService } from './auth/auth.config.service';
     GraphComponent,
     SharePointComponent,
     SiteListComponent,
+    SPSiteComponent,
     OAuthCallbackComponent
   ],
   imports: [

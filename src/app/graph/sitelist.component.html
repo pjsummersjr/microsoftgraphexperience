@@ -1,0 +1,28 @@
+<mat-grid-list *ngIf="sites; else loading" cols="3" gutterSize="15">
+    <mat-grid-tile *ngFor="let site of sites">
+            <sp-site [site]="site"></sp-site>
+    </mat-grid-tile>    
+</mat-grid-list>
+<ng-template #loading>
+    <mat-progress-bar mode="indeterminate">Loading</mat-progress-bar>
+</ng-template>
+<mat-grid-list cols="3">
+    <mat-grid-tile>
+        <div>One</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>Two</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>Three</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>One</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>Two</div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>Three</div>
+    </mat-grid-tile>
+</mat-grid-list>

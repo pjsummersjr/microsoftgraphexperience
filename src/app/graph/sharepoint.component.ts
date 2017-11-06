@@ -5,8 +5,11 @@ import {Observable} from 'rxjs/Observable';
 import { GraphService } from '../services/graph.service';
 import { SharePointSite } from '../entities/site';
 
+import {MatGridListModule,MatCardModule,MatProgressBarModule} from '@angular/material';
+
 @Component({
-    templateUrl:'./sharepoint.component.html'
+    templateUrl:'./sharepoint.component.html',
+    styleUrls:['sp.component.css']
 })
 export class SharePointComponent implements OnInit {
 
@@ -33,11 +36,22 @@ export class SharePointComponent implements OnInit {
 }
 @Component({
     selector:'site-list',
-    template:`
-        <div>{{rootSite.displayName}}</div>
-    `
+    templateUrl:'./sitelist.component.html',
+    styleUrls:['sp.component.css']
 })
 export class SiteListComponent {
-    @Input()sites: SharePointSite[];
     @Input()rootSite: SharePointSite;
+    @Input()sites:SharePointSite[];
+    constructor() {
+
+    }
+}
+
+@Component({
+    selector:'sp-site',
+    templateUrl:'./spsite.component.html',
+    styleUrls:['sp.component.css']
+})
+export class SPSiteComponent {
+    @Input()site: SharePointSite;
 }

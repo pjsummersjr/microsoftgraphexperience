@@ -12,7 +12,7 @@ let graphEndPoints = {
     baseEndPoint: "https://graph.microsoft.com/",
     beta: this.baseEndPoint + "/beta",
     myTrending: "https://graph.microsoft.com/beta/me/insights/trending?$select=",
-    sites: "https://graph.microsoft.com/v1.0/sites/root?$select=description,id,lastModifiedDateTime,name,webUrl,displayName",
+    sites: "https://graph.microsoft.com/v1.0/sites/root/sites?search=*&$select=description,id,lastModifiedDateTime,name,webUrl,displayName",
     spRootSite: "https://graph.microsoft.com/v1.0/sites/root?$select=description,id,lastModifiedDateTime,name,webUrl,displayName"
 }
 
@@ -30,7 +30,7 @@ export class GraphService {
     getSites(): Observable<SharePointSite[]> {
         let url = graphEndPoints.sites;
         let headers: Headers = this.getHeaders(url);
-        return this.http.get(url, {headers: headers}).map(response => response.json() as SharePointSite[]);
+        return this.http.get(url, {headers: headers}).map(response => response.json().value as SharePointSite[]);
     }
 
     getRootSite(): Observable<SharePointSite> {

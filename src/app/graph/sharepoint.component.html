@@ -1,3 +1,4 @@
+<div>List of your SharePoint Sites:</div>
 <div>
-    <site-list [sites]="sites" [rootSite]="rootSite"></site-list>
+    <site-list [sites]="sites | async" [rootSite]="rootSite | async"></site-list>
 </div>

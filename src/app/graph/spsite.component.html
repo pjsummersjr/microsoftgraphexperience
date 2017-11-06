@@ -1,0 +1,6 @@
+<mat-card class="siteCard" *ngIf="site; else retrievingSite">
+    <mat-card-title>{{site.displayName}}</mat-card-title>
+</mat-card>
+<ng-template #retrievingSite>
+    <div>Retrieving site information...</div>
+</ng-template>

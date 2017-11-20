@@ -1,5 +1,7 @@
 <mat-card class="siteCard" *ngIf="site; else retrievingSite">
     <mat-card-title>{{site.displayName}}</mat-card-title>
+    <button mat-raised-button color="primary">Open Site</button>
+    <button mat-raised-button color="primary">Follow Site</button>
 </mat-card>
 <ng-template #retrievingSite>
     <div>Retrieving site information...</div>

@@ -1,0 +1,22 @@
+<mat-toolbar style="margin-bottom:1px;">
+    <span>Calendar</span>
+    <mat-form-field>
+        <input matInput [matDatepicker]="startpicker" placeholder="Choose a start date" id="startDate" [(ngModel)]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+        <mat-datepicker #startpicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [matDatepicker]="endpicker" placeholder="Choose an end date" id="endDate" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+        <mat-datepicker #endpicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="updateCalendarItems()">Update</button>
+</mat-toolbar>
+<mat-grid-list *ngIf="calItems; else empty" cols="5" rowHeight="200px" gutterSize="5">
+    <mat-grid-tile *ngFor="let event of calItems">
+            <calendar-item [event]="event"></calendar-item>
+    </mat-grid-tile>    
+</mat-grid-list>
+<ng-template #empty>
+    <div>No events available</div>
+</ng-template>

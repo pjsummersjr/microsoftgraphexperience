@@ -5,7 +5,11 @@ import { MatTabsModule,
             MatInputModule,
             MatCardModule,
             MatGridListModule,
-        MatProgressBarModule } from '@angular/material';
+            MatExpansionModule,
+            MatProgressBarModule, 
+            MatDatepickerModule,
+            MatNativeDateModule
+        } from '@angular/material';
 
 @NgModule({
     imports:[MatTabsModule, 
@@ -13,14 +17,22 @@ import { MatTabsModule,
                 MatButtonModule, 
                 MatInputModule,
                 MatCardModule,
+                MatExpansionModule,
                 MatProgressBarModule,
-            MatGridListModule],
+            MatGridListModule,
+            MatDatepickerModule,
+            MatNativeDateModule
+        ],
     exports:[MatTabsModule, 
                 MatToolbarModule, 
                 MatButtonModule, 
                 MatInputModule,
                 MatCardModule,
+                MatExpansionModule,
                 MatProgressBarModule,
-            MatGridListModule]
+            MatGridListModule,
+            MatDatepickerModule,
+            MatNativeDateModule
+        ]
 })
 export class MaterialModule {} 

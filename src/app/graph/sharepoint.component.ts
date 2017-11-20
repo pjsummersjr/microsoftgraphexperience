@@ -3,29 +3,37 @@ import { Component, Input, OnInit } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import { GraphService } from '../services/graph.service';
-import { SharePointSite } from '../entities/site';
+import { SharePointSite } from '../entities/graph';
 
 import {MatGridListModule,MatCardModule,MatProgressBarModule} from '@angular/material';
 
 @Component({
     templateUrl:'./sharepoint.component.html',
-    styleUrls:['sp.component.css']
+    styleUrls:['graph.component.css']
 })
 export class SharePointComponent implements OnInit {
 
-    private sites: Observable<SharePointSite[]>;
-    private rootSite: Observable<SharePointSite>;
+    private sites: SharePointSite[];
+    private rootSite: SharePointSite;
+    private statusMesage: string;
 
     constructor(private graphService: GraphService){
     }
 
     getSites(): void {
-        this.sites = this.graphService.getSites();
+        this.graphService.getSites().
+        subscribe((sitedata) => this.sites = sitedata,
+            (error) => { this.statusMesage = 'An error has occurred retrieving the site data';}
+        );
     }
 
     getRootSite(): void {
-        this.rootSite = this.graphService.getRootSite();
-        this.rootSite.subscribe((site) => {console.log(site)});
+        
+        this.graphService.getRootSite().
+            subscribe((site) => {
+                console.log(site);
+                this.rootSite = site;
+            });
     }
 
     ngOnInit(): void {
@@ -37,7 +45,7 @@ export class SharePointComponent implements OnInit {
 @Component({
     selector:'site-list',
     templateUrl:'./sitelist.component.html',
-    styleUrls:['sp.component.css']
+    styleUrls:['graph.component.css']
 })
 export class SiteListComponent {
     @Input()rootSite: SharePointSite;
@@ -50,7 +58,7 @@ export class SiteListComponent {
 @Component({
     selector:'sp-site',
     templateUrl:'./spsite.component.html',
-    styleUrls:['sp.component.css']
+    styleUrls:['graph.component.css']
 })
 export class SPSiteComponent {
     @Input()site: SharePointSite;

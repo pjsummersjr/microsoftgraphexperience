@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import 'hammerjs';
@@ -18,6 +19,7 @@ import { LoginComponent } from './home/login.component';
 import { GraphService } from './services/graph.service';
 import { GraphComponent } from './graph/graph.component';
 import { SharePointComponent, SiteListComponent, SPSiteComponent } from './graph/sharepoint.component';
+import { CalendarComponent, CalendarItemComponent } from './graph/calendar.component';
 
 import { OAuthCallbackComponent } from './auth/oauthcallback.component';
 import { OAuthCallbackHandler } from './auth/oauthguard.handler';
@@ -35,6 +37,8 @@ import { AuthConfigService } from './auth/auth.config.service';
     AzureSearchComponent,
     GraphComponent,
     SharePointComponent,
+    CalendarComponent,
+    CalendarItemComponent,
     SiteListComponent,
     SPSiteComponent,
     OAuthCallbackComponent
@@ -44,6 +48,7 @@ import { AuthConfigService } from './auth/auth.config.service';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     RouterModule.forRoot([
       {
         path: '', redirectTo: 'login', pathMatch: 'full'
@@ -58,6 +63,9 @@ import { AuthConfigService } from './auth/auth.config.service';
       },
       {
         path:'sites', component: SharePointComponent, canActivate: [AuthenticationGuard]
+      },
+      {
+        path:'calendar', component: CalendarComponent, canActivate: [AuthenticationGuard]
       },
       {
         path: 'graph', component: GraphComponent, canActivate: [AuthenticationGuard]

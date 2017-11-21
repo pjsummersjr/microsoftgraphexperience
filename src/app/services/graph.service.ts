@@ -54,10 +54,13 @@ export class GraphService extends AppService {
     getCalendarItems(startDate:Date = new Date(), endDate?:Date): Observable<CalendarItem[]>{
         //If end date is null, set it to the end of the day specified by start date
         if(endDate == null){
-            endDate = startDate;
-            endDate.setHours(11,59,59);
+            endDate = new Date(startDate);
+            endDate.setHours(23,59,59);
+            startDate.setHours(0,0,0);
         }
-        let url = graphEndPoints.calView + "startdatetime=2017-01-01T01:00:00Z&enddatetime=2017-12-31T23:00:00Z&$select=subject,importance,organizer,attendees,start,end"
+        let startDateStr = startDate.toISOString();
+        let endDateStr = endDate.toISOString();
+        let url = graphEndPoints.calView + "startdatetime=" + startDateStr + "&enddatetime=" + endDateStr + "&$select=subject,importance,organizer,attendees,start,end"
                                            
         let headers: Headers = this.getHeaders(url);
         return this.http.get(url, {headers: headers}).

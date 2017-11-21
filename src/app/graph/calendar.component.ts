@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit {
     constructor(private graphService: GraphService){}
 
     getCalendarItems(): void {
-        this.graphService.getCalendarItems().
+        this.graphService.getCalendarItems(this.startDate, this.endDate).
             subscribe((events) => this.calItems = events,
             (error) => {
                 this.statusMessage = 'Error retrieving calendar items';

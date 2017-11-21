@@ -29,7 +29,7 @@ export class AuthService {
         this.authApp.logOut(); 
     } 
     handleTokenCallback(token, source) { 
-        console.log("Token retrieved from " + source);
+        console.debug("Token retrieved from " + source);
         this.access_token = token;
     } 
 

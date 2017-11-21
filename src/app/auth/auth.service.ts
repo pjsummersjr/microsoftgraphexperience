@@ -19,43 +19,43 @@ export class AuthService {
         this.authApp.loginPopup(this.configService.getAuthConfig.graphScopes).
         then(
             function(id_token: string) {
-                console.log("Id token acquired");
+                console.debug("Id token acquired");
                 _this.accessToken;
             }, 
-            function(error){console.log("Error logging in" + error)}
+            function(error){console.error("Error logging in" + error)}
         ); 
     } 
     logout() { 
         this.authApp.logOut(); 
     } 
-    handleTokenCallback(errorDesc, token, error, tokenType) { 
-        if(!token){
-            console.log("Error getting token: " + errorDesc);
-        }
+    handleTokenCallback(token, source) { 
+        console.log("Token retrieved from " + source);
+        this.access_token = token;
     } 
 
     public get accessToken() {
         var _this = this;
-        console.log("Trying to get the access token");
+        console.debug("Trying to get the access token");
         if(!this.access_token) {
-            console.log("Don't currently have the access token. Requesting it from the service");
+            console.debug("Don't currently have the access token. Requesting it from the service");
             _this.authApp.acquireTokenSilent(_this.configService.getAuthConfig.graphScopes).
             then(
                 function (token){
-                    console.log("Retrieved access token");
-                    _this.access_token = token;
+                    _this.handleTokenCallback(token, "acquireTokenSilent - success");
                 },
                 function (error){
                     _this.authApp.acquireTokenPopup(_this.configService.getAuthConfig.graphScopes).
                     then(
-                        function(token){_this.access_token = token},
-                        function(error){console.log("Error retrieving token: " + error);}
+                        function(token){
+                            _this.handleTokenCallback(token, "acquireTokenPopup");
+                        },
+                        function(error){console.error("Error retrieving token: " + error);}
                     )
-                    console.log("Error retrieving token: " + error);
+                    console.debug("Error retrieving token: " + error);
                 }
             );
         }
-        else { console.log("Already have the access token. Returning it.");}
+        else { console.debug("Already have the access token. Returning it.");}
         return this.access_token;
     }
     

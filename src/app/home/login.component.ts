@@ -9,16 +9,16 @@ import { AuthService } from '../auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-    constructor(private router: Router, private adalService: AuthService){
-        
-        if(this.adalService.userInfo){
-            this.router.navigate['home'];
-        }
+    constructor(private router: Router, private adalService: AuthService){        
+
     }
 
     
     ngOnInit() {
-        console.log(this.adalService.userInfo);
+        console.debug(this.adalService.userInfo);        
+        if(this.adalService.isAuthenticated){
+            this.router.navigate['home'];
+        }
     }
     
     login(): void {

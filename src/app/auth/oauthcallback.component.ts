@@ -5,10 +5,10 @@ import { AuthService } from './auth.service';
     template: '<div>Please wait...</div>' 
 }) 
 export class OAuthCallbackComponent implements OnInit { 
-    constructor(private router: Router, private adalService: AuthService) { } 
+    constructor(private router: Router, private authService: AuthService) { } 
     
     ngOnInit() { 
-        if (!this.adalService.userInfo) { 
+        if (!this.authService.isAuthenticated) { 
             this.router.navigate(['login']); 
         } else { 
             this.router.navigate(['home']); 

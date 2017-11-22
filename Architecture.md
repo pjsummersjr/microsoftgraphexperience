@@ -4,6 +4,8 @@
 Using Angular 4
 Using material.angular.io
 Using Bootstrap
+Using [Material Icons](https://material.io/icons/)
+(https://material.angular.io/components/icon/overview)
 
 ## Authentication
 Using MSAL libraries:

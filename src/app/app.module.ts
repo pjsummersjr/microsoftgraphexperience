@@ -62,10 +62,10 @@ import { AuthConfigService } from './auth/auth.config.service';
         path: 'azure-search', component: AzureSearchComponent, canActivate: [AuthenticationGuard]
       },
       {
-        path:'sites', component: SharePointComponent, canActivate: [AuthenticationGuard]
+        path: 'sites', component: SharePointComponent, canActivate: [AuthenticationGuard]
       },
       {
-        path:'calendar', component: CalendarComponent, canActivate: [AuthenticationGuard]
+        path: 'calendar', component: CalendarComponent, canActivate: [AuthenticationGuard]
       },
       {
         path: 'graph', component: GraphComponent, canActivate: [AuthenticationGuard]
@@ -73,7 +73,7 @@ import { AuthConfigService } from './auth/auth.config.service';
       { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] }
     ])
   ],
-  providers: [SearchService, 
+  providers: [SearchService,
               GraphService,
               OAuthCallbackHandler,
               AuthService,

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, NgModule } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Calendar, CalendarItem } from '../entities/graph';
 import { GraphService } from '../services/graph.service';
@@ -51,7 +52,10 @@ export class CalendarComponent implements OnInit {
 export class CalendarItemComponent {
     @Input()event: CalendarItem;
 
+    constructor(private router: Router){}
+
     loadCalendarItemDetail(): void {
-        console.log("Something");
+        console.log('Item id: ' + this.event.id);
+        this.router.navigateByUrl('/calendar/detail/' + this.event.id);
     }
 }

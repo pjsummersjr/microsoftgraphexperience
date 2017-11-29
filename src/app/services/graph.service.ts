@@ -58,23 +58,25 @@ export class GraphService extends AppService {
             endDate.setHours(23,59,59);
             startDate.setHours(0,0,0);
         }
-        let startDateStr = startDate.toISOString();
-        let endDateStr = endDate.toISOString();
-        let url = graphEndPoints.calView + "startdatetime=" + startDateStr + "&enddatetime=" + endDateStr + "&$select=subject,importance,organizer,attendees,start,end"
-                                           
-        let headers: Headers = this.getHeaders(url);
+        const startDateStr = startDate.toISOString();
+        const endDateStr = endDate.toISOString();
+        const url = graphEndPoints.calView + "startdatetime=" + startDateStr + 
+                            "&enddatetime=" + endDateStr + "&$select=id,subject,importance,organizer,attendees,start,end";
+
+        const headers: Headers = this.getHeaders(url);
         return this.http.get(url, {headers: headers}).
-            map((response) => {      
+            map((response) => {
                     return response.json().value.map(event =>
                         {
-                            var item:CalendarItem = new CalendarItem();
+                            const item: CalendarItem = new CalendarItem();
+                            item.id = event.id;
                             item.importance = event.importance;
                             item.subject = event.subject;
                             item.start = new Date(event.start.dateTime);
                             item.end = new Date(event.end.dateTime);
-                            if(item.start.getDate() != item.end.getDate() || 
-                                item.start.getMonth() != item.end.getMonth() ||
-                                item.start.getFullYear() != item.end.getFullYear())
+                            if (item.start.getDate() !== item.end.getDate() ||
+                                item.start.getMonth() !== item.end.getMonth() ||
+                                item.start.getFullYear() !== item.end.getFullYear())
                             {
                                 item.isMultiDay = true;
                             }
@@ -83,9 +85,9 @@ export class GraphService extends AppService {
 
                             item.attendees = event.attendees.map((attendee) => attendee as Attendee);
 
-                            return item; 
+                            return item;
                         }
-                    )                                             
+                    )
             }).
             catch(this.handleError);
     }

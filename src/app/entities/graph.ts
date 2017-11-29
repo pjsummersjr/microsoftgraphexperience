@@ -28,28 +28,29 @@ export class Person {
 }
 
 export class Attendee extends Person {
-    type:string;
+    type: string;
     status: {
-        response:string;
+        response: string;
         time: string;
-    }
+    };
 
-    constructor(){
+    constructor() {
         super();
-        this.type = "";
+        this.type = '';
         this.status = {
-            response: "",
-            time: ""
+            response: '',
+            time: ''
         };
     }
 }
 
 export class CalendarItem {
+    id: string;
     subject: string;
     importance: string;
-    start:Date;
-    end:Date;
-    isMultiDay:boolean = false;
+    start: Date;
+    end: Date;
+    isMultiDay: Boolean = false;
     organizer: Person;
     attendees: Attendee[];
 }

@@ -20,12 +20,13 @@ import { GraphService } from './services/graph.service';
 import { GraphComponent } from './graph/graph.component';
 import { SharePointComponent, SiteListComponent, SPSiteComponent } from './graph/sharepoint.component';
 import { CalendarComponent, CalendarItemComponent } from './graph/calendar.component';
+import { CalendarDetailComponent } from './graph/calendar-detail.component';
 
 import { OAuthCallbackComponent } from './auth/oauthcallback.component';
 import { OAuthCallbackHandler } from './auth/oauthguard.handler';
 import { AuthenticationGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
-import { AuthConfigService } from './auth/auth.config.service'; 
+import { AuthConfigService } from './auth/auth.config.service';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { AuthConfigService } from './auth/auth.config.service';
     SharePointComponent,
     CalendarComponent,
     CalendarItemComponent,
+    CalendarDetailComponent,
     SiteListComponent,
     SPSiteComponent,
     OAuthCallbackComponent
@@ -66,6 +68,9 @@ import { AuthConfigService } from './auth/auth.config.service';
       },
       {
         path: 'calendar', component: CalendarComponent, canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'calendar/detail/:id', component: CalendarDetailComponent, canActivate: [AuthenticationGuard]
       },
       {
         path: 'graph', component: GraphComponent, canActivate: [AuthenticationGuard]
